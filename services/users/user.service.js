@@ -18,7 +18,7 @@ export const getIndexData = async (req) => {
     };
 
     const paginationResult = await User.paginate({}, options);
- const data = formatPaginationResponse(paginationResult, params, req);
+    const data = formatPaginationResponse(paginationResult, params, req);
 
     return data;
   } catch (error) {
