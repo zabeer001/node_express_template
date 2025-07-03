@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -21,6 +22,9 @@ const userSchema = new mongoose.Schema({
 }, {
     timestamps: true,
 });
+
+//paginate
+userSchema.plugin(mongoosePaginate); // Attach the pagination plugin
 
 const User = mongoose.model('User', userSchema);
 
