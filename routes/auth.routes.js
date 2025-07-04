@@ -1,19 +1,18 @@
 import { Router } from "express";
-
-
-import { signUp ,login  } from "../controllers/auth.controller.js";
+import AuthController from "../controllers/auth.controller.js";
 import upload from "../helpers/multer.js";
-
+import { authenticate } from "../middleware/authMiddleware.js";
 
 const authRouter = Router();
 
-// login
-authRouter.post('/login', upload.array('photos', 3), login);
+authRouter.post('/login', upload.array('photos', 3), AuthController.login);
 
-// signup
-authRouter.post('/sign-up', upload.none(), signUp);
+authRouter.post('/sign-up', upload.none(), AuthController.signUp);
 
-// authRouter.get('/logout', logout);
+authRouter.post('/logout', AuthController.logout);
 
+authRouter.get('/profile-details', authenticate, AuthController.profile);
+
+// No middleware here, just call controller directly
 
 export default authRouter;
