@@ -1,17 +1,19 @@
 import { Router } from "express";
 
 
+import { signUp ,login  } from "../controllers/auth.controller.js";
+import upload from "../helpers/multer.js";
+
 
 const authRouter = Router();
 
-authRouter.get("/", (req, res) => {
-  res.send("Auth route is working");
-});
+// login
+authRouter.post('/login', upload.array('photos', 3), login);
 
-authRouter.post("/login", (req, res) => {
-  res.send("Login route is working");
-});
+// signup
+authRouter.post('/sign-up', upload.none(), signUp);
 
-authRouter.post("/register", (req, res) => {
-  res.send("Register route is working");
-});
+// authRouter.get('/logout', logout);
+
+
+export default authRouter;
